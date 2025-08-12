@@ -1,0 +1,25 @@
+{% extends "base.html" %} 
+{% block content %} 
+<h2>Agregar Cliente</h2> 
+<form method="POST"> 
+    <div class="mb-3"> 
+        <label>Nif</label> 
+        <input type="text" name="nif" class="form-control" required> 
+    </div> 
+    <div class="mb-3"> 
+        <label>Nombre</label> 
+        <input type="text" name="nombre" class="form-control" required> 
+    </div> 
+    <div class="mb-3"> 
+        <label>Direccion</label> 
+        <input type="number" name="direccion" class="form-control" 
+required> 
+    </div> 
+    <div class="mb-3"> 
+        <label>Telefono</label> 
+        <input type="tel" name="telefono" class="form-control" required> 
+    </div>
+
+    <button type="submit" class="btn btn-success">Guardar</button> 
+</form> 
+{% endblock %} 
