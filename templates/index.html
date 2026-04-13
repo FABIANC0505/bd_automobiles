@@ -1,39 +1,80 @@
-{% extends "base.html" %} 
-{% block content %} 
+{% extends "base.html" %}
+{% block content %}
 
-<a href="{{ url_for('add_clientes') }}" class="btn btn-primary mb-3">Agregar Cliente</a> 
+<!-- ── Header ────────────────────────────────────────────────────────────── -->
+<div class="d-flex align-items-center justify-content-between page-header flex-wrap gap-3">
+    <div>
+        <h1><i class="bi bi-people-fill me-2" style="color:var(--accent)"></i>Clientes</h1>
+        <p>Gestión de clientes registrados en el taller</p>
+    </div>
+    <a href="{{ url_for('add_clientes') }}" class="btn-accent text-decoration-none d-inline-flex align-items-center gap-2">
+        <i class="bi bi-plus-lg"></i> Agregar Cliente
+    </a>
+</div>
 
-<table class="table table-striped"> 
-    <thead> 
-        <tr> 
-            <th>NIF</th> 
-            <th>Nombre</th> 
-            <th>Dirección</th> 
-            <th>Teléfono</th> 
-        </tr> 
-    </thead> 
-    <tbody> 
-        {% for cliente in clientes %} 
-        <tr> 
-            <td>{{ cliente['nif'] }}</td> 
-            <td>{{ cliente['nombre'] }}</td> 
-            <td>{{ cliente['direccion'] }}</td> 
-            <td>{{ cliente['telefono'] }}</td> 
-            <td> 
-                <a href="{{ url_for('edit_clientes', id=cliente['id']) }}" class="btn btn-warning">Editar</a> 
+<!-- ── Tabla ──────────────────────────────────────────────────────────────── -->
+<div class="card-dark">
+    {% if clientes %}
+    <table class="table-dark-custom">
+        <thead>
+            <tr>
+                <th><i class="bi bi-fingerprint me-1"></i>NIF</th>
+                <th><i class="bi bi-person me-1"></i>Nombre</th>
+                <th><i class="bi bi-geo-alt me-1"></i>Dirección</th>
+                <th><i class="bi bi-telephone me-1"></i>Teléfono</th>
+                <th style="text-align:right">Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for cliente in clientes %}
+            <tr>
+                <td>
+                    <span class="badge-pill" style="background:rgba(79,110,247,.15);color:#a5b4fc;">
+                        {{ cliente['nif'] }}
+                    </span>
+                </td>
+                <td style="font-weight:500">{{ cliente['nombre'] }}</td>
+                <td style="color:var(--text-muted)">{{ cliente['direccion'] }}</td>
+                <td>
+                    <i class="bi bi-telephone me-1" style="color:var(--accent);font-size:.8rem"></i>
+                    {{ cliente['telefono'] }}
+                </td>
+                <td>
+                    <div class="d-flex justify-content-end gap-2">
+                        <a href="{{ url_for('edit_clientes', id=cliente['id']) }}"
+                           class="btn-accent text-decoration-none d-inline-flex align-items-center gap-1"
+                           style="background:rgba(79,110,247,.2);color:#a5b4fc;border:1px solid rgba(79,110,247,.35)">
+                            <i class="bi bi-pencil-fill" style="font-size:.8rem"></i> Editar
+                        </a>
+                        <form action="{{ url_for('delete_clientes', id=cliente['id']) }}" method="post"
+                              onsubmit="return confirm('¿Eliminar a {{ cliente['nombre'] }}?')">
+                            <button type="submit"
+                                    class="btn-accent d-inline-flex align-items-center gap-1"
+                                    style="background:rgba(230,57,70,.18);color:#ff8087;border:1px solid rgba(230,57,70,.35)">
+                                <i class="bi bi-trash3-fill" style="font-size:.8rem"></i> Eliminar
+                            </button>
+                        </form>
+                    </div>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <div class="empty-state">
+        <i class="bi bi-person-x"></i>
+        <p style="font-size:1rem;font-weight:500">No hay clientes registrados</p>
+        <p style="font-size:.875rem">Agrega el primer cliente usando el botón de arriba.</p>
+    </div>
+    {% endif %}
+</div>
 
-                <form action="{{ url_for('delete_clientes', id=cliente.id) }}" method="post" style="display:inline-block;"> 
-                    <button type="submit" class="btn btn-danger">Eliminar</button> 
-                </form>
-
-            </td> 
-        </tr> 
-        {% else %}
-        <tr>
-            <td colspan="5">No hay clientes registrados</td>
-        </tr>
-        {% endfor %} 
-    </tbody> 
-</table> 
+<!-- ── Contador ────────────────────────────────────────────────────────────── -->
+{% if clientes %}
+<p class="mt-3" style="font-size:.8rem;color:var(--text-muted)">
+    <i class="bi bi-info-circle me-1"></i>
+    {{ clientes|length }} cliente{{ 's' if clientes|length != 1 else '' }} registrado{{ 's' if clientes|length != 1 else '' }}
+</p>
+{% endif %}
 
 {% endblock %}

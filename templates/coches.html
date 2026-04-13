@@ -1,23 +1,54 @@
 {% extends "base.html" %}
 {% block content %}
-<h2>Agregar Cliente</h2>
-<form method="POST">
-    <div class="mb-3">
-        <label for="nif" class="form-label">NIF</label>
-        <input type="number" class="form-control" id="nif" name="nif" required>
+
+<div class="row justify-content-center">
+  <div class="col-12 col-md-9 col-lg-7">
+
+    <div class="page-header">
+      <h1><i class="bi bi-car-front-fill me-2" style="color:var(--accent)"></i>Coches</h1>
+      <p>Registro de vehículos asociados al taller</p>
     </div>
-    <div class="mb-3">
-        <label for="nombre" class="form-label">Nombre</label>
-        <input type="text" class="form-control" id="nombre" name="nombre" required>
+
+    <div class="card-dark p-4">
+      <form method="POST" autocomplete="off">
+
+        <div class="form-floating mb-3">
+          <input type="text" class="form-control" id="matricula" name="matricula"
+                 placeholder="Matrícula" required>
+          <label for="matricula"><i class="bi bi-card-text me-1"></i>Matrícula</label>
+        </div>
+
+        <div class="form-floating mb-3">
+          <input type="text" class="form-control" id="marca" name="marca"
+                 placeholder="Marca" required>
+          <label for="marca"><i class="bi bi-car-front me-1"></i>Marca</label>
+        </div>
+
+        <div class="form-floating mb-3">
+          <input type="text" class="form-control" id="modelo" name="modelo"
+                 placeholder="Modelo" required>
+          <label for="modelo"><i class="bi bi-tag me-1"></i>Modelo</label>
+        </div>
+
+        <div class="form-floating mb-4">
+          <input type="number" class="form-control" id="anio" name="anio"
+                 placeholder="Año" min="1900" max="2100" required>
+          <label for="anio"><i class="bi bi-calendar me-1"></i>Año</label>
+        </div>
+
+        <div class="d-flex gap-3">
+          <button type="submit" class="btn-accent d-inline-flex align-items-center gap-2">
+            <i class="bi bi-check-lg"></i> Guardar Coche
+          </button>
+          <a href="{{ url_for('index') }}" class="btn-outline-muted text-decoration-none d-inline-flex align-items-center gap-2">
+            <i class="bi bi-x-lg"></i> Cancelar
+          </a>
+        </div>
+
+      </form>
     </div>
-    <div class="mb-3">
-        <label for="direccion" class="form-label">Dirección</label>
-        <input type="text" class="form-control" id="direccion" name="direccion" required>
-    </div>
-    <div class="mb-3">
-        <label for="telefono" class="form-label">Teléfono</label>
-        <input type="number" class="form-control" id="telefono" name="telefono" required>
-    </div>
-    <button type="submit" class="btn btn-success">Guardar</button>
-</form>
-{% endblock %} 
+
+  </div>
+</div>
+
+{% endblock %}

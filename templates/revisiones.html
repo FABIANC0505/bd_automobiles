@@ -1,33 +1,67 @@
-{% extends "base.html" %} 
-{% block content %} 
-<h2>Agregar Aprendiz</h2> 
-<form method="POST"> 
-    <div class="mb-3"> 
-        <label>Nombre</label> 
-        <input type="text" name="nombre" class="form-control" required> 
-    </div> 
-    <div class="mb-3"> 
-        <label>Apellido</label> 
-        <input type="text" name="apellido" class="form-control" required> 
-    </div> 
-    <div class="mb-3"> 
-        <label>Tipo de Identificación</label> 
-        <input type="number" name="tipo_identificacion" class="form-control" 
-required> 
-    </div> 
-    <div class="mb-3"> 
-        <label>Contacto</label> 
-        <input type="tel" name="contacto" class="form-control" required> 
-    </div> 
-    <div class="mb-3"> 
-        <label>Dirección</label> 
-        <input type="text" name="direccion" class="form-control" required> 
-    </div> 
-    <div class="mb-3"> 
-        <label>Fecha de Nacimiento</label> 
-        <input type="date" name="fecha_nacimiento" class="form-control" 
-required> 
-    </div> 
-    <button type="submit" class="btn btn-success">Guardar</button> 
-</form> 
-{% endblock %} 
+{% extends "base.html" %}
+{% block content %}
+
+<div class="row justify-content-center">
+  <div class="col-12 col-md-9 col-lg-7">
+
+    <div class="page-header">
+      <h1><i class="bi bi-tools me-2" style="color:var(--success)"></i>Revisiones</h1>
+      <p>Registro de revisiones y mantenimiento de vehículos</p>
+    </div>
+
+    <div class="card-dark p-4">
+      <form method="POST" autocomplete="off">
+
+        <div class="form-floating mb-3">
+          <input type="text" class="form-control" id="nombre" name="nombre"
+                 placeholder="Nombre" required>
+          <label for="nombre"><i class="bi bi-person me-1"></i>Nombre</label>
+        </div>
+
+        <div class="form-floating mb-3">
+          <input type="text" class="form-control" id="apellido" name="apellido"
+                 placeholder="Apellido" required>
+          <label for="apellido"><i class="bi bi-person-badge me-1"></i>Apellido</label>
+        </div>
+
+        <div class="form-floating mb-3">
+          <input type="text" class="form-control" id="tipo_identificacion" name="tipo_identificacion"
+                 placeholder="Tipo de Identificación" required>
+          <label for="tipo_identificacion"><i class="bi bi-card-list me-1"></i>Tipo de Identificación</label>
+        </div>
+
+        <div class="form-floating mb-3">
+          <input type="tel" class="form-control" id="contacto" name="contacto"
+                 placeholder="Contacto" required>
+          <label for="contacto"><i class="bi bi-telephone me-1"></i>Contacto</label>
+        </div>
+
+        <div class="form-floating mb-3">
+          <input type="text" class="form-control" id="direccion" name="direccion"
+                 placeholder="Dirección" required>
+          <label for="direccion"><i class="bi bi-geo-alt me-1"></i>Dirección</label>
+        </div>
+
+        <div class="form-floating mb-4">
+          <input type="date" class="form-control" id="fecha_nacimiento" name="fecha_nacimiento"
+                 placeholder="Fecha de Nacimiento" required>
+          <label for="fecha_nacimiento"><i class="bi bi-calendar-date me-1"></i>Fecha de Nacimiento</label>
+        </div>
+
+        <div class="d-flex gap-3">
+          <button type="submit" class="btn-accent d-inline-flex align-items-center gap-2"
+                  style="background:var(--success)">
+            <i class="bi bi-check-lg"></i> Guardar Revisión
+          </button>
+          <a href="{{ url_for('index') }}" class="btn-outline-muted text-decoration-none d-inline-flex align-items-center gap-2">
+            <i class="bi bi-x-lg"></i> Cancelar
+          </a>
+        </div>
+
+      </form>
+    </div>
+
+  </div>
+</div>
+
+{% endblock %}
